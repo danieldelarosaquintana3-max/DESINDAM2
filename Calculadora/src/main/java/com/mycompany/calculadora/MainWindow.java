@@ -90,11 +90,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField1.setText("0");
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField1FocusLost(evt);
-            }
-        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -103,11 +98,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField2.setText("0");
-        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField2FocusLost(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,7 +180,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        String  x = jTextField1.getText();
+        try {
+            System.err.println("ERROR");
+            String  x = jTextField1.getText();
         String  y = jTextField2.getText();
         
         int x1 = Integer.parseInt(x);
@@ -198,46 +190,71 @@ public class MainWindow extends javax.swing.JFrame {
         
         int resta = x1 - y1;
         jLabel2.setText(String.valueOf(resta));
+        } catch (Exception e) {
+            LetraProhibidas l =  new LetraProhibidas(this, true);
+            l.setVisible(true);
+        }
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
- 
-        String  x = jTextField1.getText();
-        String  y = jTextField2.getText();
+        try {
+            String  x = jTextField1.getText();
+            String  y = jTextField2.getText();
 
 
 
-        int x1 = Integer.parseInt(x);
-        int y1 = Integer.parseInt(y);
-       
-        int suma = x1 + y1;
-        jLabel2.setText(String.valueOf(suma));
+            int x1 = Integer.parseInt(x);
+            int y1 = Integer.parseInt(y);
+
+            int suma = x1 + y1;
+            jLabel2.setText(String.valueOf(suma));    
+        } catch (Exception e) {
+            LetraProhibidas l = new LetraProhibidas(this,true);
+            l.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String  x = jTextField1.getText();
-        String  y = jTextField2.getText();
+        try {
+            String  x = jTextField1.getText();
+            String  y = jTextField2.getText();
+
+            int x1 = Integer.parseInt(x);
+            int y1 = Integer.parseInt(y);
+
+            int multiplicacion = x1 * y1;
+            jLabel2.setText(String.valueOf(multiplicacion));    
+        } catch (Exception e) {
+            LetraProhibidas l = new LetraProhibidas(this, true);
+            l.setVisible(true);
+        }
         
-        int x1 = Integer.parseInt(x);
-        int y1 = Integer.parseInt(y);
-        
-        int multiplicacion = x1 * y1;
-        jLabel2.setText(String.valueOf(multiplicacion));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String  x = jTextField1.getText();
-        String  y = jTextField2.getText();
+        try {
+            String  x = jTextField1.getText();
+            String  y = jTextField2.getText();
+
+            int x1 = Integer.parseInt(x);
+            int y1 = Integer.parseInt(y);
+            
+            int division = x1 / y1;
+            
+            jLabel2.setText(String.valueOf(division));
+
+        } catch (Exception e) {
+            LetraProhibidas l =  new LetraProhibidas(this, true);
+            l.setVisible(true);
+        }
         
-        int x1 = Integer.parseInt(x);
-        int y1 = Integer.parseInt(y);
         
-        int division = x1 / y1;
-        jLabel2.setText(String.valueOf(division));
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -257,31 +274,6 @@ public class MainWindow extends javax.swing.JFrame {
                     
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-        // TODO add your handling code here:
-        try {
-            String  x = jTextField2.getText();
-        
-        int x1 = Integer.parseInt(x);
-        } catch (Exception e) {
-             System.err.println("Boton2");
-             LetraProhibidas l =  new LetraProhibidas(this, true);
-             l.setVisible(true);
-             
-        }
-    }//GEN-LAST:event_jTextField2FocusLost
-
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        // TODO add your handling code here:
-        try {
-            String  y = jTextField1.getText();
-        
-        int y1 = Integer.parseInt(y);
-        } catch (Exception e) {
-             System.err.println("Me cago en dios");
-        }
-    }//GEN-LAST:event_jTextField1FocusLost
 
     /**
      * @param args the command line arguments

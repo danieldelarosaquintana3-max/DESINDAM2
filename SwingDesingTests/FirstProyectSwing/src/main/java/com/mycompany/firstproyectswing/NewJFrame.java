@@ -84,7 +84,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonContadorActionPerformed
     public void cambiaTexto(String s){
-        jLabel1.setText("Buenos dias" + s + "¿quieres un cafe?");
+        jLabel1.setText("Buenos dias " + s + "¿quieres un cafe?");
     }
     /**
      * @param args the command line arguments

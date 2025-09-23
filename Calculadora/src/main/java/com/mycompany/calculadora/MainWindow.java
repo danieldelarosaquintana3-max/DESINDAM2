@@ -47,7 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel2.setText("0");
 
-        jButton1.setText("=");
+        jButton1.setText("x^y");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -176,6 +176,21 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try {
+            System.err.println("ERROR");
+            String  x = jTextField1.getText();
+            String  y = jTextField2.getText();
+        
+            double x1 = Double.parseDouble(x);
+            double y1 = Double.parseDouble(y);
+        
+            double elevado = Math.pow(x1, y1);
+        jLabel2.setText(String.valueOf(elevado));
+        } catch (Exception e) {
+            LetraProhibidas l =  new LetraProhibidas(this, true);
+            l.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

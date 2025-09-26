@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.gestionclientes;
+package com.mycompany.gestionclientes.gui;
 
+import com.mycompany.gestionclientes.dto.Cliente;
+import com.mycompany.gestionclientes.logica.LogicaNegocio;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,15 +23,22 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
-        iniciarTabla();
+        actualizarTabla();
+        
     }
-    private void iniciarTabla() {
+    
+
+    private void actualizarTabla() {
         DefaultTableModel dtm =  new DefaultTableModel();
         dtm.setColumnIdentifiers(new String[]{"Nombre","Apellidos","Fecha de alta","Provincia"});
+        List<Cliente> listaClientes = LogicaNegocio.getListaClientes();
+        for(Cliente cliente : listaClientes){
+            dtm.addRow(cliente.toArrayString());
+        }
         jTable1.setModel(dtm);
     }
     
-    public void addCliente(Cliente cliente) {
+    /*public void addCliente(Cliente cliente) {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.addRow(cliente.toArrayString());
     }
@@ -41,11 +52,21 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +95,16 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setText("Borrar");
+        jMenuItem3.setToolTipText("");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -98,7 +129,20 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
        DAlta dalta =  new DAlta(this,true);
        dalta.setVisible(true);
+       actualizarTabla();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        try {
+            LogicaNegocio.borrarCliente();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se puede borrar mas");
+        }
+        
+        actualizarTabla();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,8 +171,12 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

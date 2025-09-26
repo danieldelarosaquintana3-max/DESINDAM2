@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.mycompany.gestionclientes;
+package com.mycompany.gestionclientes.gui;
 
+import com.mycompany.gestionclientes.dto.Cliente;
+import com.mycompany.gestionclientes.logica.LogicaNegocio;
 import java.util.Date;
 import javax.swing.JTextField;
 
@@ -14,13 +16,13 @@ import javax.swing.JTextField;
 public class DAlta extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DAlta.class.getName());
-    private Inicio inicio;
+    // private Inicio inicio;
     /**
      * Creates new form DAlta
      */
     public DAlta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        inicio = (Inicio) parent;
+        //inicio = (Inicio) parent;
         initComponents();
     }
 
@@ -138,7 +140,8 @@ public class DAlta extends javax.swing.JDialog {
         Date fecha = (Date)jSpinner1.getValue();
         String provincia =  (String) jComboBox1.getSelectedItem();
         Cliente cliente =  new Cliente(nombre, apellidos, provincia, fecha);
-        inicio.addCliente(cliente);
+        LogicaNegocio.addCliente(cliente);
+    //inicio.addCliente(cliente);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

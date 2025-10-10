@@ -61,6 +61,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 400, 400));
@@ -83,12 +84,16 @@ public class Inicio extends javax.swing.JFrame {
         });
         getContentPane().add(jButton10);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getContentPane().add(jLabel1);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         l.reset();
+        jLabel1.setText("");
     }//GEN-LAST:event_jButton10ActionPerformed
     private void changeImg(java.awt.event.ActionEvent evt , Logica l) {
              // TODO add your handling code here:
@@ -127,13 +132,17 @@ public class Inicio extends javax.swing.JFrame {
         if(m == 1) {
             for(JButton b : botones) {
                 b.setEnabled(false);
+                jLabel1.setText("Gano circulo");
             }
         }else if(m == 2) {
             for(JButton b : botones) {
                 b.setEnabled(false);
+                jLabel1.setText("Gano  cruz");
             }
+            
         }else {
             System.out.println(m);
+            jLabel1.setText("");
         }
     }
     /**
@@ -172,5 +181,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

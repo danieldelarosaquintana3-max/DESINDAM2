@@ -14,7 +14,7 @@ public class Cliente {
     private String  nombre ,apellidos ,provincia;
     private Date fecha;
 
-    public Cliente(String nombre, String apellidos, String provincia, Date fecha) {
+    public Cliente(String nombre, String apellidos, Date fecha, String provincia) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.provincia = provincia;

@@ -7,6 +7,8 @@ package com.mycompany.gestionclientes.logica;
 import com.mycompany.gestionclientes.dto.Cliente;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JTable;
 
 /**
  *
@@ -19,11 +21,15 @@ public class LogicaNegocio {
         listaClientes.add(cliente);
     }
     
+    
     public static List<Cliente> getListaClientes() {
+        
         return listaClientes;
     }
-    public static void borrarCliente() {
-        listaClientes.remove(0);
+
+    public static void borrarCliente(JTable tabla) {
+        int m = tabla.getSelectedRow();
+        listaClientes.remove(m);
     }
     
 }

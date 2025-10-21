@@ -139,7 +139,7 @@ public class DAlta extends javax.swing.JDialog {
         String apellidos =  textFieldApellidos.getText();
         Date fecha = (Date)jSpinner1.getValue();
         String provincia =  (String) jComboBox1.getSelectedItem();
-        Cliente cliente =  new Cliente(nombre, apellidos, provincia, fecha);
+        Cliente cliente =  new Cliente(nombre, apellidos, fecha, provincia);
         LogicaNegocio.addCliente(cliente);
     //inicio.addCliente(cliente);
         setVisible(false);

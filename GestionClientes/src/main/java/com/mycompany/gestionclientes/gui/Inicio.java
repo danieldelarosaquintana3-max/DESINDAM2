@@ -6,16 +6,20 @@ package com.mycompany.gestionclientes.gui;
 
 import com.mycompany.gestionclientes.dto.Cliente;
 import com.mycompany.gestionclientes.logica.LogicaNegocio;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author danie
  */
 public class Inicio extends javax.swing.JFrame {
-    
+    TableRowSorter<DefaultTableModel> sorter;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Inicio.class.getName());
 
     /**
@@ -24,7 +28,24 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
         actualizarTabla();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         
+        Date fechaHoy = new Date();
+
+        LogicaNegocio.addCliente(new Cliente("María", "López", fechaHoy, "Asturias"));
+        LogicaNegocio.addCliente(new Cliente("Juan", "Pérez", fechaHoy, "Madrid"));
+        LogicaNegocio.addCliente(new Cliente("Ana", "Torres", fechaHoy, "Valencia"));
+        LogicaNegocio.addCliente(new Cliente("Luis", "García", fechaHoy, "Sevilla"));
+        LogicaNegocio.addCliente(new Cliente("Carmen", "Ruiz", fechaHoy, "Barcelona"));
+        LogicaNegocio.addCliente(new Cliente("Pedro", "Martín", fechaHoy, "Bilbao"));
+
+        dtm.addRow(new String[]{"María", "López", sdf.format(new Date()), "Asturias"});
+        dtm.addRow(new String[]{"Juan", "Pérez", sdf.format(new Date()), "Madrid"});
+        dtm.addRow(new String[]{"Ana", "Torres", sdf.format(new Date()), "Valencia"});
+        dtm.addRow(new String[]{"Luis", "García", sdf.format(new Date()), "Sevilla"});
+        dtm.addRow(new String[]{"Carmen", "Ruiz", sdf.format(new Date()), "Barcelona"});
+        dtm.addRow(new String[]{"Pedro", "Martín", sdf.format(new Date()), "Bilbao"});
     }
     
 
@@ -35,6 +56,11 @@ public class Inicio extends javax.swing.JFrame {
         for(Cliente cliente : listaClientes){
             dtm.addRow(cliente.toArrayString());
         }
+        sorter = new TableRowSorter<>(dtm);
+        jTable1.setRowSorter(sorter);
+        
+
+
         jTable1.setModel(dtm);
     }
     
@@ -57,6 +83,9 @@ public class Inicio extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -82,6 +111,15 @@ public class Inicio extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setText("FILTRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(jTextPane1);
 
         jMenu1.setText("Clientes");
 
@@ -113,13 +151,27 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -136,13 +188,24 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         try {
-            LogicaNegocio.borrarCliente();
+            LogicaNegocio.borrarCliente(jTable1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No se puede borrar mas");
         }
         
         actualizarTabla();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String texto = jTextPane1.getText();
+            if (texto.trim().length() == 0) {
+                sorter.setRowFilter(null);
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto));
+            }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +233,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -178,6 +242,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
